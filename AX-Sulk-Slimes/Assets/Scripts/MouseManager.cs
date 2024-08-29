@@ -6,7 +6,8 @@ public class MouseManager : MonoBehaviour
 {
     [Header("Mouse Info")]
     public Vector3 clickStartLocation;
-    
+    public Vector3 startingPosition;
+    public Quaternion startingRotation;
     [Header("Physics")]
     public Vector3 launchVector;
     public float launchForce;
@@ -14,10 +15,13 @@ public class MouseManager : MonoBehaviour
     [Header("Slime")]
     public Transform slimeTransform;
     public Rigidbody slimeRigidbody;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        startingPosition = slimeTransform.position;
+        startingRotation = slimeTransform.rotation;
     }
 
     // Update is called once per frame
@@ -42,6 +46,13 @@ public class MouseManager : MonoBehaviour
             slimeRigidbody.isKinematic = false;
             slimeRigidbody.AddForce(launchVector * launchForce, ForceMode.Force);
             print("Release!");
+        }
+        if (Input.GetKeyDown("space"))
+        {
+            slimeRigidbody.isKinematic = true;
+            slimeTransform.position = startingPosition;
+            slimeTransform.rotation = startingRotation;
+            
         }
     }
 }
