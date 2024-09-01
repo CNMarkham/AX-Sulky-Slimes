@@ -15,6 +15,7 @@ public class MouseManager : MonoBehaviour
     [Header("Slime")]
     public Transform slimeTransform;
     public Rigidbody slimeRigidbody;
+    
 
 
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class MouseManager : MonoBehaviour
                 mouseDifference.y * 1.2f,
                 mouseDifference.y * 1.5f
                 );
+            slimeTransform.position = startingPosition - launchVector / 400;
             launchVector.Normalize();
         }
         if (Input.GetMouseButtonUp(0))
