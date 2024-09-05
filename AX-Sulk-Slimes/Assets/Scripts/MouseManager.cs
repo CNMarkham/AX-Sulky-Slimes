@@ -15,8 +15,9 @@ public class MouseManager : MonoBehaviour
     [Header("Slime")]
     public Transform slimeTransform;
     public Rigidbody slimeRigidbody;
-    
 
+    [Header("Lives")]
+    public LivesManager livesManager;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,10 @@ public class MouseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (livesManager.lives < 0)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             clickStartLocation = Input.mousePosition;
@@ -54,6 +59,7 @@ public class MouseManager : MonoBehaviour
             slimeRigidbody.isKinematic = true;
             slimeTransform.position = startingPosition;
             slimeTransform.rotation = startingRotation;
+            livesManager.RemoveLife();
             
         }
     }
