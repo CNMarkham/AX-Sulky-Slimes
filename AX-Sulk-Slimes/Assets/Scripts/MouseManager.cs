@@ -19,6 +19,8 @@ public class MouseManager : MonoBehaviour
     [Header("Lives")]
     public LivesManager livesManager;
 
+
+    public bool launched = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class MouseManager : MonoBehaviour
         {
             clickStartLocation = Input.mousePosition;
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && launched == false)
         {
             Vector3 mouseDifference = clickStartLocation - Input.mousePosition;
             launchVector = new Vector3(
@@ -48,11 +50,12 @@ public class MouseManager : MonoBehaviour
             slimeTransform.position = startingPosition - launchVector / 400;
             launchVector.Normalize();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && launched == false)
         {
             slimeRigidbody.isKinematic = false;
             slimeRigidbody.AddForce(launchVector * launchForce, ForceMode.Force);
             print("Release!");
+            launched = true;
         }
         if (Input.GetKeyDown("space"))
         {
@@ -60,7 +63,7 @@ public class MouseManager : MonoBehaviour
             slimeTransform.position = startingPosition;
             slimeTransform.rotation = startingRotation;
             livesManager.RemoveLife();
-            
+            launched = false;
         }
     }
 }

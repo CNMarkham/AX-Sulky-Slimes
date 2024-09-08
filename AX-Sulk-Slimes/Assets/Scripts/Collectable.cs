@@ -7,12 +7,12 @@ public class Collectables : MonoBehaviour
 {
     [Header("Movement Values")]
     public float distanceToMove;
-
+    
     public Vector3 startingPosition;
     public Vector3 endingPosition;
 
-    public float speed = 0.1f;
-    public float direction = 1f;
+    public float speed = 4f;
+    public float direction = 4f;
 
     [Header("Scene to Load")]
     public int sceneNumber;
